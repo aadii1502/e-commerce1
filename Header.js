@@ -1,0 +1,34 @@
+import React, { useContext, useState } from 'react';
+//import sidebar
+import { SidebarContext } from '../contexts/SidebarContext'; 
+import { CartContext } from '../contexts/CartContext'; 
+//import icons
+import {BsBag} from 'react-icons/bs';
+//import link
+import {Link} from 'react-router-dom'
+//import logo
+import Logo from '../img/logo.png'
+const Header = () => {
+  //header state 
+  const[isActive,setIsActive] = useState(false);
+  const {isOpen,setIsOpen} =useContext(SidebarContext);
+  const {itemAmount}=useContext(CartContext);
+  return(
+  <header className=' bg-pink-100 '>
+    <div className='flex container mx-auto items-center justify-between h-full'>
+      <Link to={"/"}>
+        <div>
+          <img className='w-[40px] ' src={Logo} alt=''/>
+        </div>
+      </Link>
+      {/*cart*/}
+      <div className=' hover: cursor-pointer flex relative max-w-[50px]' onClick={() => setIsOpen(!isOpen)}><BsBag className=' text-2xl ml-2'>
+        </BsBag>
+        <div className=' bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center'>{itemAmount}</div>
+        </div>
+        </div>
+    </header>
+  );
+};
+
+export default Header
